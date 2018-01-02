@@ -24,15 +24,13 @@ You have an existing store selling energy drinks. You'd like to hide to most use
 ## Instructions
 
 * Duplicate your theme (always backup theme)
-* Within your theme head to Customer/Register.liquid
-* Add at the top of the page the code found at [Form Redirect]()
-* Between the <head> and </head> of the theme.liquid file add [Challenge]()
+* Between the <head> and </head> of the theme.liquid file add [Challenge](https://github.com/mikhailarden/Shopify-OpenSource/blob/master/Wholesale%20Configuration/Challenge)
 
 ###Step #2 (Optional)
 Creating a "waiting page". This is great for before you tag your customers to show a screen where they can be told that you got their request and will alert them as soon as they are tagged.
 
 * Create a page called 'for-review'
-* Replace  {{ page.content }} with the file [For Review]()
+* Replace  {{ page.content }} with the file [For Review](https://github.com/mikhailarden/Shopify-OpenSource/blob/master/Wholesale%20Configuration/For%20Review)
 * Wrap all of your code found in the templates folder in
 
 ```
