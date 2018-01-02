@@ -26,7 +26,7 @@ You have an existing store selling energy drinks. You'd like to hide to most use
 * Duplicate your theme (always backup theme)
 * Between the <head> and </head> of the theme.liquid file add [Challenge](https://github.com/mikhailarden/Shopify-OpenSource/blob/master/Wholesale%20Configuration/Challenge)
 
-###Step #2 (Optional)
+### Step #2 (Optional)
 Creating a "waiting page". This is great for before you tag your customers to show a screen where they can be told that you got their request and will alert them as soon as they are tagged.
 
 * Create a page called 'for-review'
