@@ -1,0 +1,70 @@
+{%- comment -%}
+
+In our example we are using a simple metafields app. 
+
+
+namespace: product
+key: extra-description
+value: This is extra description for my products
+value_type: string
+
+
+In essence the code should look like: [Remove the brackets]
+
+{% assign global = product.metafields.[namespace]%}
+{% assign key = '[key]' %}
+{% assign key = '[Second Key]' %}
+
+We then reference the metafield usinging the 'global' variable and the 'key' variable.
+
+{%- endcomment -%}}
+
+
+{% assign global = product.metafields.product%}
+{% assign key = 'sizing' %}
+{% assign key = 'shipping' %}
+
+<div data-accordion-group>
+  <div class="accordion" data-accordion>
+    <div data-control>
+      Product Description <span class="more">+</span>
+    </div>
+    <div data-content>
+      <div> {{product.description}}</div>
+      <div>Descrip-1</div>
+      <div>Descrip-2</div>
+      <div>Descrip-3</div>
+    </div>
+  </div>
+  <div class="accordion" data-accordion>
+    <div data-control>Tab 2</div>
+    <div data-content>
+     <p> {{ global.sizing }} </p>
+    </div>
+  </div>
+  
+  <div class="accordion" data-accordion>
+    <div data-control>Tab 3</div>
+    <div data-content>
+      <p>   {{global.shipping}} </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function (){
+    $('.accordion').accordion({"transitionSpeed": 400});
+
+    $(document).on('click', '[data-control]', (event) => {
+      /*
+       * Replace "+" symbol for a "-"
+       * and viceversa
+       */
+      const current = $(event.target).closest('.more').context.innerHTML
+      if(current.includes('+'))
+        $(event.target).closest('.more').context.innerHTML = readMore.replace(/\+/gm, '-')
+	  else
+      	$(event.target).closest('.more').context.innerHTML = readMore.replace(/\-/gm, '+')
+    })
+  })()
+</script>

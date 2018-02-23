@@ -1,0 +1,47 @@
+
+
+<div data-accordion-group>
+  <div class="accordion" data-accordion>
+    <div data-control>
+      Product Description <span class="more">+</span>
+    </div>
+    <div data-content>
+      <div> {{product.description}}</div>
+      
+    </div>
+  </div>
+  <div class="accordion" data-accordion>
+    <div data-control>Tab 2</div>
+    <div data-content>
+     
+
+
+<p> Content </p>
+    </div>
+  </div>
+  
+  <div class="accordion" data-accordion>
+    <div data-control>Tab 3</div>
+    <div data-content>
+      <p>   Content</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function (){
+    $('.accordion').accordion({"transitionSpeed": 400});
+
+    $(document).on('click', '[data-control]', (event) => {
+      /*
+       * Replace "+" symbol for a "-"
+       * and viceversa
+       */
+      const current = $(event.target).closest('.more').context.innerHTML
+      if(current.includes('+'))
+        $(event.target).closest('.more').context.innerHTML = readMore.replace(/\+/gm, '-')
+	  else
+      	$(event.target).closest('.more').context.innerHTML = readMore.replace(/\-/gm, '+')
+    })
+  })()
+</script>
