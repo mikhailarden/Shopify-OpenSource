@@ -1,0 +1,257 @@
+
+
+
+
+<section class="accordion-container" style="background-image: url({{section.settings.mainimg | img_url: '1000x1000'}});">
+  {% comment %} Desktop accordion {% endcomment %}
+  <h2 class="title center whitesmoke on-top">{{section.settings.title}}</h2>
+  <div class="accordion">
+    <ul class="lg-accordion">
+      <li id="readmore1">
+        {% comment %} First cell {% endcomment %}
+        <div>
+          <a>
+            <h4 class="fas fa-plus fa-lg cs-accordion-icon"></h4>
+            <h4 class="cs-accordion-title">{{section.settings.sectiontitle}}</h4>
+            <p class="cs-accordion-content">{{section.settings.sectionparagraph}}</p>
+          </a>
+        </div>
+      </li>
+      <li id="readmore2">
+        {% comment %} Second cell {% endcomment %}
+        <div>
+          <a>
+            <h4 class="fas fa-plus fa-lg cs-accordion-icon"></h4>
+            <h4 class="cs-accordion-title">{{section.settings.sectiontitle2}}</h4>
+            <p class="cs-accordion-content">{{section.settings.sectionparagraph4}}</p>
+          </a>
+        </div>
+      </li>
+      <li id="readmore3">
+        {% comment %} Third cell {% endcomment %}
+        <div>
+          <a>
+            <h4 class="fas fa-plus fa-lg cs-accordion-icon"></h4>
+            <h4 class="cs-accordion-title">{{section.settings.sectiontitle3}}</h4>
+            <p class="cs-accordion-content">{{section.settings.sectionparagraph3}}</p>
+          </a>
+        </div>
+      </li>
+      <li id="readmore4">
+        {% comment %} Fourth cell {% endcomment %}
+        <div>
+          <a>
+            <h4 class="fas fa-plus fa-lg cs-accordion-icon"></h4>
+            <h4 class="cs-accordion-title">{{section.settings.sectiontitle4}}</h4>
+            <p class="cs-accordion-content">{{section.settings.sectionparagraph4}}</p>
+          </a>
+        </div>
+      </li>
+      <li id="readmore5">
+        {% comment %} Fifth cell {% endcomment %}
+        <div>
+          <a>
+            <h4 class="fas fa-plus fa-lg cs-accordion-icon"></h4>
+            <h4 class="cs-accordion-title">{{section.settings.sectiontitle5}}</h4>
+            <p class="cs-accordion-content">{{section.settings.sectionparagraph5}}</p>
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+<div class="container sm-accordion">
+  {% comment %} Mobile accordion {% endcomment %}
+  <ul>
+    <li>
+      {% comment %} First cell {% endcomment %}
+      <div>
+        <i class="fas fa-chevron-right fa-lg fa-2x"></i>
+        <h4>{{section.settings.sectiontitle}}</h4>
+        <p>{{section.settings.sectionparagraph}}</p>
+      </div>
+    </li>
+    <li>
+      {% comment %} Second cell {% endcomment %}
+      <div>
+        <i class="fas fa-chevron-right fa-lg fa-2x"></i>
+        <h4>{{section.settings.sectiontitle2}}</h4>
+        <p>
+          {{section.settings.sectionparagraph4}}
+        </p>
+      </div>
+    </li>
+    <li>
+      {% comment %} Third cell {% endcomment %}
+      <div>
+        <i class="fas fa-chevron-right fa-lg fa-2x"></i>
+        <h4 class="hideable">{{section.settings.sectiontitle3}}</h4>
+        <p>
+          {{section.settings.sectionparagraph3}}
+        </p>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<script>
+  const staticAnchors = () => $('a:not([href])').on('click', (e) => e.preventDefault())
+  const resetTilesBut = (elm) => {
+    // Reset non-clicked columns to normal, minus 'elm' param
+    $(`li.expanded:not(${elm})`).css('background-image', 'url()').removeClass('expanded')
+    $(`li.reduced`).removeClass('reduced')
+    $(document).find(".cs-accordion-icon").removeClass('fa-times').addClass('fa-plus')
+  }
+  
+  const clickToResizeColumns = () => {
+	const children = $('.lg-accordion [id^=readmore]')
+    const targets  = []
+	// images for tiles' backgrounds
+    const images   = [
+      '{{section.settings.cellimg | img_url: '1000x1000'}}',
+      '{{section.settings.cellimg2 | img_url: '1000x1000'}}',
+      '{{section.settings.cellimg3 | img_url: '1000x1000'}}',
+      '{{section.settings.cellimg4 | img_url: '1000x1000'}}',
+      '{{section.settings.cellimg5 | img_url: '1000x1000'}}'
+    ]
+    
+    for (let i = 0; i < children.length; i++)
+      targets.push(`#readmore${i+1}`)
+    
+    // loop through targets
+    targets.map((elm, index) => {
+      $(document).on('click', elm, (data) => {
+        resetTilesBut(elm)
+        if ($(elm).hasClass('expanded'))
+          resetTilesBut('reset-all')
+        else {
+          // Target from normal to expanded and set img-bg property
+          $(elm).css('background-image', `url(${images[index]})`).addClass('expanded')
+          $(elm).find(".cs-accordion-icon").removeClass('fa-plus').addClass('fa-times')
+          // Reduce non-clicked
+          $(`.accordion li:not(${elm})`).addClass('reduced')
+        }
+	  })
+	})
+  }
+    
+  $(document).ready(() => {
+	clickToResizeColumns()
+    staticAnchors()
+  })
+</script>
+
+{% schema %}
+{
+  "name": "Mosaic Tiles",
+  "settings": [
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Heading",
+      "default": "Title"
+    },
+{
+      "id": "mainimg",
+      "type": "image_picker",
+      "label": "Main Background Image"
+    },
+
+{
+      "id": "cellimg",
+      "type": "image_picker",
+      "label": "Cell Image Picker"
+    },
+
+{
+      "id": "sectiontitle",
+      "type": "text",
+      "label": "1st Section Heading",
+      "default": "Section Title #1"
+    },
+{
+      "id": "sectionparagraph",
+      "type": "textarea",
+      "label": "Section Paragraph #1",
+      "default": "Section Paragraph #1"
+    },
+{
+      "id": "cellimg2",
+      "type": "image_picker",
+      "label": "Cell Image Picker 2"
+    },
+{
+      "id": "sectiontitle2",
+      "type": "text",
+      "label": "2nd Section Heading",
+      "default": "Section Title #2"
+    },
+{
+      "id": "sectionparagraph2",
+      "type": "textarea",
+      "label": "Section Paragraph #2",
+      "default": "Section Paragraph #2"
+    },
+{
+      "id": "cellimg3",
+      "type": "image_picker",
+      "label": "Cell Image Picker 3"
+    },
+
+{
+      "id": "sectiontitle3",
+      "type": "text",
+      "label": " 3rd Section Heading",
+      "default": "Section Title #3"
+    }, 
+{
+      "id": "sectionparagraph3",
+      "type": "textarea",
+      "label": "Section Paragraph #3",
+      "default": "Section Paragraph #3"
+    },
+{
+      "id": "cellimg4",
+      "type": "image_picker",
+      "label": "Cell Image Picker 4"
+    },
+
+{
+      "id": "sectiontitle4",
+      "type": "text",
+      "label": " Fourth Section Heading",
+      "default": "Section Title #4"
+    }, 
+{
+      "id": "sectionparagraph4",
+      "type": "textarea",
+      "label": "Section Paragraph #4",
+      "default": "Section Paragraph #4"
+    },
+{
+      "id": "cellimg5",
+      "type": "image_picker",
+      "label": "Cell Image Picker 5"
+    },
+{
+      "id": "sectiontitle5",
+      "type": "text",
+      "label": " 3rd Section Heading",
+      "default": "Section Title #5"
+    }, 
+{
+      "id": "sectionparagraph5",
+      "type": "textarea",
+      "label": "Section Paragraph #5",
+      "default": "Section Paragraph #5"
+    }
+  ],
+  
+  "presets": [
+    {
+      "name": "Mosaic Tiles",
+      "category": "Custom Section"
+    }
+  ]
+}
+{% endschema %}

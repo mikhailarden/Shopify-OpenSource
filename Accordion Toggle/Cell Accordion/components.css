@@ -1,0 +1,286 @@
+.accordion-container {
+    height:              510px;
+    
+    background-position: center 33%;
+    background-size:     cover;
+  }
+  
+  .accordion {
+    background-color: rgba(0, 0, 0, 0.15);
+    width:            100%;
+    max-width:        100%;
+    height:           100%;
+    max-height:       100%;
+    overflow:         hidden;
+    margin:           -60px 0 0 0; */
+  }
+  
+  .accordion li { cursor: pointer; }
+  
+  .sm-accordion ul,
+  .lg-accordion ul {
+    padding:        0;
+    display:        flex;
+    flex-direction: row;
+    flex-wrap:      wrap;
+    list-style:     none;
+  }
+  
+  @media screen and (min-width: 796px) {
+    .lg-accordion { display: block }
+  
+    .sm-accordion { display: none }
+  
+    .accordion ul {
+      width:        100%;
+      height:       inherit;
+      display:      table;
+      table-layout: fixed;
+      margin:       0;
+      padding:      0;
+    }
+  
+    .accordion ul li {
+      display:             table-cell;
+      vertical-align:      bottom;
+      position:            relative;
+      height:              inherit;
+      width:               16.666%;
+      background-repeat:   no-repeat;
+      background-position: center center;
+      transition:          all 500ms cubic-bezier(0, 0, 0.2, 1);
+    }
+  
+    .accordion ul li div {
+      background:   rgba(0, 0, 0, 0.2);
+      border-right: 1px solid rgba(255, 255, 255, 0.4);
+      display:      block;
+      overflow:     hidden;
+      width:        100%;
+      height:       inherit;
+    }
+  
+    .accordion ul li div a {
+      text-align:      center;
+      display:         block;
+      width:           100%;
+      position:        absolute;
+      bottom:          0;
+      z-index:         3;
+      padding:         15px 20px;
+      box-sizing:      border-box;
+      color:           #FFFFFF;
+      text-decoration: none;
+      font-family:     Open Sans, sans-serif;
+      transition:      all 200ms ease;
+    }
+  
+    .cs-accordion-title {
+      opacity:        1;
+      color:          whitesmoke;
+      text-overflow:  ellipsis;
+      text-align:     left;
+      font-family:    Butler, sans-serif;
+      text-transform: uppercase;
+      margin-bottom:  2px;
+      z-index:        15;
+      position:       relative;
+    }
+  
+    .cs-accordion-icon:not(.fa-times) {
+      opacity: 0.6;
+    }
+  
+    .cs-accordion-content {
+      height:            0;
+      transition:        300ms linear;
+      opacity:           0;
+      width:             100%;
+      text-overflow:     ellipsis;
+      position:          relative;
+      z-index:           5;
+      overflow:          hidden;
+      -webkit-transform: translateX(-20px);
+      transform:         translateX(-20px);
+    }
+  
+    li:not(.expanded) .cs-accordion-title {
+      text-align: center;
+    }
+  
+    li.expanded .cs-accordion-content {
+      height:            auto;
+      transition:        0.5s;
+      opacity:           1;
+      -webkit-transform: translateX(0);
+      transform:         translateX(0);
+      text-align:        left;
+      font-family: GT Haptik;
+    }
+  }
+  
+  @media screen and (min-width: 796px) {
+    .lg-accordion { display: block }
+  
+    .sm-accordion { display: none }
+  
+    .accordion ul {
+      width:        100%;
+      height:       inherit;
+      display:      table;
+      table-layout: fixed;
+      margin:       0;
+      padding:      0;
+    }
+  
+    .accordion ul li {
+      display:             table-cell;
+      vertical-align:      bottom;
+      background-repeat:   no-repeat;
+      background-position: center center;
+      transition: all 0.5s cubic-bezier(0, 0, 0.2, 1);
+    }
+  
+    .accordion ul li div {
+      background:   rgba(0, 0, 0, 0.2);
+      border-right: 1px solid rgba(255, 255, 255, 0.4);
+      display:      block;
+      overflow:     hidden;
+      width:        100%;
+      height:       inherit;
+    }
+  
+    .accordion ul li div a {
+      display:         block;
+      width:           100%;
+      position:        absolute;
+      bottom:          0;
+      z-index:         3;
+      /* padding:         15px 20px; */
+      box-sizing:      border-box;
+      color:           #FFFFFF;
+      text-decoration: none;
+      font-family:     Open Sans, sans-serif;
+      transition:      all 200ms ease-out;
+    }
+  
+    .accordion ul li div a * {
+      margin:             5px 0 15px 0;
+      width:              100%;
+      text-overflow:      ellipsis;
+      position:           relative;
+      z-index:            5;
+      white-space:        pre-wrap;
+      overflow:           inherit;
+      -webkit-transform:  translateY(20px);
+      transform:          translateY(20px);
+      -webkit-transition: all 400ms ease;
+      transition:         all 200ms ease;
+    }
+  
+    .cs-accordion-title {
+      opacity:        1;
+      text-overflow:  ellipsis;
+      font-family:    Montserrat, sans-serif;
+      font-size:      1em;
+      text-transform: uppercase;
+      margin:         0 5px 20px 5px;
+    }
+  
+    .cs-accordion-content {
+      font-size: 13.5px;
+      padding:   0 60px 10px 0;
+    }
+  
+    /* Enable this to make the containers expand on click */
+    .expanded {
+      width:            195% !important;
+      transform:        rotate(0deg);
+      background-size:  cover;
+    }
+  
+    .reduced {
+      background: #607D8B;
+    }
+  
+    .reduced .cs-accordion-title {
+      transform:   rotate(-90deg);
+      white-space: nowrap;
+    }
+  
+    .reduced [data-fa-i2svg] { display: none; }
+  
+  }
+  
+  @media screen and (max-width: 795px) {
+    .lg-accordion { display: none }
+  
+    .sm-accordion { display: block }
+  
+    .sm-accordion ul li { width: 100%; }
+  
+    .sm-accordion ul li div { }
+  
+    .sm-accordion ul li div a * { }
+  
+    .sm-accordion ul li div a h4 { }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .accordion { height: auto; }
+  
+    .accordion ul li,
+    .accordion ul li:hover,
+    .accordion ul:hover li,
+    .accordion ul:hover li:hover {
+      position:           relative;
+      display:            table;
+      table-layout:       fixed;
+      width:              100%;
+      -webkit-transition: none;
+      transition:         none;
+    }
+  }
+  
+  @media screen and (max-width: 795px) {
+    .lg-accordion { display: none }
+  
+    .sm-accordion {
+      display: block;
+      padding: 0 !important;
+    }
+  
+    .sm-accordion ul li {
+      width:  100%;
+      cursor: pointer;
+    }
+  
+    .sm-accordion ul li div { }
+  
+    .sm-accordion ul li div * { }
+  
+    .sm-accordion ul li div h4 { display: inline; }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .accordion { height: auto; }
+  
+    .accordion ul li,
+    .accordion ul li:hover,
+    .accordion ul:hover li,
+    .accordion ul:hover li:hover {
+      position:           relative;
+      display:            table;
+      table-layout:       fixed;
+      width:              100%;
+      -webkit-transition: none;
+      transition:         none;
+    }
+  }
+  
+  .whitesmoke { color: whitesmoke !important; }
+  
+  .on-top {
+    position: relative;
+    z-index:  150;
+  }
