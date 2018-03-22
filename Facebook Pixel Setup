@@ -1,0 +1,99 @@
+{%- comment -%}
+
+Below code is used to expand Facebook Pixel's matching data into Shopify's functions. The code will seek to do the following:
+1. Reduce the discrepancies in tracking
+2. Match tracking when a customer is active
+
+
+
+///////////// ----------  Please ensure the following is done before publishing -------------- ////////////////
+
+- Replace all XXXXX with valid pixel identifyer.
+- Create a snippet called 'facebook matching' in your theme.
+- Include the snippet in the theme.liquid file. 
+
+
+At the end of the code there will be a snippet to add Settings > Checkout > Additional Scripts
+
+{%- endcomment -%}
+
+
+
+{%- comment -%}
+Advanced Matching 
+{%- endcomment -%}
+
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', 'XXXXX', {
+
+{% if customer %}
+    em: {{customer.email}},
+    fn: {{customer.first_name}},
+    ln: {{customer.last_name}},
+
+{%endif%}
+
+  });
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1687782307908438&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+
+{%- comment -%}
+Runs on the product page only
+{%- endcomment -%}
+
+{% if link.type == product_link %}
+
+<script>
+  fbq('track', 'ViewContent', {
+    value: {{product.price}},
+    currency: '{{shop.currency}}',
+    content_ids: '{{product.id}}',
+    content_type: 'product',
+  });
+</script>
+
+
+
+{%endif%}
+
+{%- comment -%}
+Runs on search performed only
+{%- endcomment -%}
+
+{% if search.performed %}
+  <script>
+  fbq('track', 'Search', {
+    search_string: '{{search.terms}}',
+  });
+</script>
+
+
+{% endif %}
+
+
+{%- comment -%}
+Checkout code 
+{%- endcomment -%}
+
+<script>
+  fbq('track', 'Purchase', {
+    value: {{checkout.total_price}},
+    currency: '{{shop.currency}}',
+    content_ids: '{{checkout.order_id}}',
+  });
+</script>
+
