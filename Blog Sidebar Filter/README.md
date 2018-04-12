@@ -127,7 +127,7 @@ On a blog post add a `{{year}} { {month}}` as a tags. for. eg `2017 january` and
 </div>
 ```
 
-###3. Tags
+### 3. Tags
 Tags are default by shopify but direct listing would list the categories and archives tags as well. so we will filter them out.
 
 ```
