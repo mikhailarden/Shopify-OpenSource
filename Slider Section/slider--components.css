@@ -64,7 +64,7 @@
   align-items: flex-start;
 }
 
-.flex--center {
+.slider--overlay--colored.flex--center {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -84,7 +84,7 @@
     align-items: center;
   }
   
-.flex--left {
+  .slider--overlay--colored.flex--left {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -105,7 +105,7 @@
     align-items: flex-start;
   }
 
-  .flex--right {
+  .slider--overlay--colored.flex--right {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
