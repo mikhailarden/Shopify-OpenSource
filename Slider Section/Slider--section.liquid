@@ -1,0 +1,195 @@
+
+{%- comment -%}
+MICA Slider Section Build
+Version 1.2.5 | Revised April 2018
+
+Slider is fully responsive and section is slightly styled and can be overrided using !important tags via CSS. 
+
+To add an additional slider, follow the layout of sliders below. 
+We will maintain the JS and original components via a CDN and can be used.
+{%- endcomment -%}
+
+<!---======
+Script includes 
+- IE9x Support
+- JQuery 3.3.1 minified
+- Minified components
+========-->
+
+
+ <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript" intergrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/mikhailarden/Shopify-OpenSource/1b3c1c33/Slider%20Section/slider--components.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/mikhailarden/Shopify-OpenSource/master/Slider%20Section/normalize.css">
+<script src="https://cdn.rawgit.com/mikhailarden/Shopify-OpenSource/master/Slider%20Section/components.js"> </script>
+
+
+
+  <div class="slider--container">
+
+
+    <div data-animation="slide" data-duration="500" data-infinite="1" class="slider--element w-slider">
+
+      <div class="w-slider-mask">
+
+
+  {% for block in section.blocks %}
+       
+{%- comment -%}
+Control flow tags added to dynamically change the class of each slider.
+{%- endcomment -%}
+        <div class="slider--{% if forloop.index == 1 %}one{% elsif forloop.index == 2 %}two{%else%}three{%endif%} w-slide"
+        style=" background-image: url('{{block.settings.image | img_url: '1000x1000'}}');"
+        >
+          <div 
+            {% if block.settings.color %} style="background-color: {{block.settings.color}};" {%endif%}
+          
+          class="
+          slider--overlay--colored {% if block.settings.color%} {%else%} no--color{%endif%} 
+         {{ block.settings.flextext }}">
+
+          {% if block.settings.heading %}
+            <h1 class="slider--heading">{{block.settings.heading}}</h1>
+            {%endif%}
+
+             {% if block.settings.subtitle %}
+            <div class="slider--subtitle">{{block.settings.subtitle}}</div>
+             {%endif%}
+            
+              {% if block.settings.paragraph %}
+            <p class="slider--paragraph left">{{block.settings.paragraph}}</p>
+             {%endif%}
+            
+              {% if block.settings.btn %}
+            <a href="{{block.settings.url}}"  style="background-color:{{block.settings.btncolor}}!important;" class="slider--button w-button">{{block.settings.btn}}</a>
+             {%endif%}
+            </div>
+        </div>
+
+ 
+      {% endfor %}
+
+      </div>
+
+  {% for block in section.blocks %}
+      {% if forloop.index == 1 %}
+      
+      {%else%}
+      <div class="slider--left--arrow w-slider-arrow-left">
+        <div class="w-icon-slider-left"></div>
+      </div>
+      <div class="slider--right--arrow w-slider-arrow-right">
+        <div class="w-icon-slider-right"></div>
+      </div>
+      
+      <div class="w-slider-nav w-round"></div>
+      {%endif%}
+      {%endfor%}
+    </div>
+  </div>
+ 
+
+{%comment%}
+Style Overrides to match merchant theme
+{%endcomment%}
+
+<style>
+  /* style goes here */
+
+</style>
+
+
+
+ {% schema %}
+{
+  "name": "Slider",
+	"max_blocks": 3,
+  "settings": [
+    {
+      "id": "txtcolor",
+      "type": "color",
+      "label": "Text Color",
+      "default": "#fff"
+    }
+  ],
+  "blocks": [
+      
+    {
+      "type": "select",
+      "name": "Add Slider",
+      "settings": [
+          {
+          "id": "image",
+          "type": "image_picker",
+       		"label": "Slider Image"
+        },
+          {
+          "id": "heading",
+          "type": "text",
+       		"label": "Slider Heading"
+        },
+           {
+          "id": "color",
+          "type": "color",
+       		"label": "Slider Overlay Color"
+        },
+
+        {
+             "type":      "select",
+             "id":        "flextext",
+             "label":     "Text Alignment",
+             "options": [
+               { "value": "flex--left", "label": "Left Aligned" },
+               { "value": "flex--center", "label": "Center Aligned" },
+                 { "value": "flex--right", "label": "Right Aligned" }
+             ],
+             "default":   "flex--left",
+             "info":      "Moves the alignment of the text"
+},
+        {
+          "id": "subtitle",
+          "type": "text",
+       		"label": "Slider Subtitle"
+        },
+        {
+          "id": "paragraph",
+          "type": "textarea",
+       		"label": "Slider Pragraph"
+        },
+        {
+          "id": "link",
+          "type": "url",
+       		"label": "Button link"
+        },
+        {
+          "id": "btn",
+          "type": "text",
+          "label": "Button text",
+          "default": "Click here"
+        },
+{
+          "id": "btncolor",
+          "type": "color",
+          "label": "Button Color",
+          "default": "#f36e21"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slider Slides ",
+      "category": "Slider Blocks",
+      "blocks": [
+        { 
+          "type": "select"
+        },
+        {
+          "type": "select"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
