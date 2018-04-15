@@ -1,0 +1,101 @@
+
+{%- comment -%}
+MICA Slider  Product Build
+Version 1.2.5 | Revised April 2018
+
+Slider is fully responsive and section is slightly styled and can be overrided using !important tags via CSS. 
+
+To add an additional slider, follow the layout of sliders below. 
+We will maintain the JS and original components via a CDN and can be used.
+{%- endcomment -%}
+
+<!---======
+Script includes 
+- IE9x Support
+- JQuery 3.3.1 minified
+- Minified components
+========-->
+
+
+ <script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript" intergrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/mikhailarden/Shopify-OpenSource/1b3c1c33/Slider%20Section/slider--components.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/mikhailarden/Shopify-OpenSource/master/Slider%20Section/normalize.css">
+<script src="https://cdn.rawgit.com/mikhailarden/Shopify-OpenSource/master/Slider%20Section/components.js"> </script>
+
+
+
+  <div class="slider--container">
+
+
+    <div data-delay="4000" data-animation="cross" data-autoplay="1" data-duration="500" data-infinite="1"  class="slider--element w-slider">
+
+      <div class="w-slider-mask">
+
+
+       
+{%- comment -%}
+Control flow tags added to dynamically change the class of each slider.
+{%- endcomment -%}
+        
+        
+        <div class="slider--one w-slide">
+         
+         {% for image in product.images %}
+          {% if forloop.index == 1 %}
+    <img id="productimg" src="{{ image.src | product_img_url: '2048x2048' }}">
+          {%endif%}
+		{% endfor %}
+        </div>
+
+         <div class="slider--two w-slide">
+         
+         {% for image in product.images %}
+          {% if forloop.index == 2 %}
+    <img id="productimg" src="{{ image.src | product_img_url: '2048x2048' }}">
+          {%endif%}
+		{% endfor %}
+        </div>
+
+        
+         <div class="slider--three w-slide">
+         
+         {% for image in product.images %}
+          {% if forloop.index == 3 %}
+    <img id="productimg" src="{{ image.src | product_img_url: '2048x2048' }}">
+          {%endif%}
+		{% endfor %}
+        </div>
+
+
+
+ 
+
+      </div>
+
+  
+      
+
+      <div class="slider--left--arrow w-slider-arrow-left">
+        <div class="w-icon-slider-left"></div>
+      </div>
+      <div class="slider--right--arrow w-slider-arrow-right">
+        <div class="w-icon-slider-right"></div>
+      </div>
+      
+      <div class="w-slider-nav w-round"></div>
+     
+    </div>
+  </div>
+ 
+
+{%comment%}
+Style Overrides to match merchant theme
+{%endcomment%}
+
+<style>
+  .slider--element {height:100vh!important;}
+  #productimg {height:100%;}
+
+</style>
+
+
