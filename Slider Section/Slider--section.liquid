@@ -14,7 +14,16 @@ Script includes
 - IE9x Support
 - JQuery 3.3.1 minified
 - Minified components
+- Added JQuery to dynamically change height, only use to override slider height
 ========-->
+
+
+<script>
+  $(window).on("load resize",function(){
+$(".slider--container").height($(window).height() - $("#shopify-section-announcement").height() - $("#shopify-section-header").height());
+});
+</script>
+
 
 
  <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
